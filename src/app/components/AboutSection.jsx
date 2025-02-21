@@ -59,7 +59,9 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-          I'm a data-driven specializing in Generative AI/ML, with expertise in predictive modeling, data analytics, and advanced ML techniques. Proficient in Python, TensorFlow, and Power BI, I build efficient models and real-time analytics systems to enhance decision-making. Passionate about deep learning and NLP, I continuously explore innovative solutions while prioritizing data security and ethical AI practices.          </p>
+          I'm a data-driven specializing in Generative AI/ML, with expertise in predictive modeling, data analytics, and advanced ML techniques. Proficient in Python, TensorFlow, and Power BI, I build efficient models and real-time analytics systems to enhance decision-making. Passionate about deep learning and NLP, I continuously explore innovative solutions while prioritizing data security and ethical AI practices.         
+          {/* Replace all ' with &apos; */}
+           </p>
           <div className="flex flex-row justify-start mt-8">
             <TabButton
               selectTab={() => handleTabChange("skills")}
