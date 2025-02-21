@@ -1,28 +1,31 @@
+// app/api/send/route.js
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const fromEmail = process.env.FROM_EMAIL;
 
-export async function POST(req, res) {
-  const { email, subject, message } = await req.json();
-  console.log(email, subject, message);
+export async function POST(req) {
   try {
-    const data = await resend.emails.send({
+    const { email, subject, message } = await req.json();
+    
+    const { data, error } = await resend.emails.send({
       from: fromEmail,
-      to: [fromEmail, email],
+      to: [fromEmail],
       subject: subject,
-      react: (
-        <>
-          <h1>{subject}</h1>
-          <p>Thank you for contacting us!</p>
-          <p>New message submitted:</p>
-          <p>{message}</p>
-        </>
-      ),
+      text: `From: ${email}\n\nMessage: ${message}`,
     });
+
+    if (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
+
     return NextResponse.json(data);
+    
   } catch (error) {
-    return NextResponse.json({ error });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
