@@ -36,7 +36,7 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            I’m a passionate IT student with expertise in data analytics, machine learning, and web development. 
+            I'm a passionate IT student with expertise in data analytics, machine learning, and web development. 
             I love crafting innovative solutions to real-world problems.
           </p>
           <div>
