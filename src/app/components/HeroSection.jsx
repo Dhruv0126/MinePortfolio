@@ -1,11 +1,15 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 const HeroSection = () => {
+  useEffect(() => {
+    // Removed floating text animation logic
+  }, []);
+
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -18,11 +22,13 @@ const HeroSection = () => {
         >
           <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-8xl lg:leading-normal font-extrabold">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hello, I&apos;m{" "}
+              Hello, I&apos;m
             </span>
             <br />
             <TypeAnimation
               sequence={[
+                "",
+                1000,
                 "Dhruv Gupta",
                 1000,
                 "AI/ML Engineer",

@@ -1,7 +1,8 @@
 "use client";
-import React, { useTransition, useState } from "react";
+import React, { useTransition, useState, useEffect } from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
+import { motion } from "framer-motion";
 
 const TAB_DATA = [
   {
@@ -46,6 +47,15 @@ const AboutSection = () => {
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
 
+  useEffect(() => {
+    const text = document.querySelector(".floating-text");
+    text.innerHTML = text.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    const letters = document.querySelectorAll(".letter");
+    letters.forEach((letter, i) => {
+      letter.style.animationDelay = `${i * 0.1}s`;
+    });
+  }, []);
+
   const handleTabChange = (id) => {
     startTransition(() => {
       setTab(id);
@@ -53,11 +63,24 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="text-white" id="about">
+    <section className="text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image src="/images/Quick Overview The Industries Most Affected by AI in 2020.jpeg" width={500} height={500} alt="About image" />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="animated-image"
+        >
+          <Image
+            src="/images/Quick Overview The Industries Most Affected by AI in 2020.jpeg"
+            width={500}
+            height={500}
+            alt="About image"
+            className="animated-image"
+          />
+        </motion.div>
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
-          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+          <h2 className="text-4xl font-bold text-white mb-4 floating-text">About Me</h2>
           <p className="text-base lg:text-lg">
           I&apos;m a data-driven specializing in Generative AI/ML, with expertise in predictive modeling, data analytics, and advanced ML techniques. Proficient in Python, TensorFlow, and Power BI, I build efficient models and real-time analytics systems to enhance decision-making. Passionate about deep learning and NLP, I continuously explore innovative solutions while prioritizing data security and ethical AI practices.         
           </p>
@@ -89,5 +112,30 @@ const AboutSection = () => {
     </section>
   );
 };
+
+// Updated CSS for animations
+const styles = `
+  .floating-text .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(1em);
+    animation: float 0.5s forwards;
+  }
+
+  @keyframes float {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+// Inject styles into the document
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement("style");
+  styleSheet.type = "text/css";
+  styleSheet.innerText = styles;
+  document.head.appendChild(styleSheet);
+}
 
 export default AboutSection;

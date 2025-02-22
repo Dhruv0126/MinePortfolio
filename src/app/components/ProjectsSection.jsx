@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { motion, useInView } from "framer-motion";
@@ -62,6 +62,15 @@ const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
+  useEffect(() => {
+    const text = document.querySelector(".projects-heading");
+    text.innerHTML = text.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    const letters = document.querySelectorAll(".projects-heading .letter");
+    letters.forEach((letter, i) => {
+      letter.style.animationDelay = `${i * 0.1}s`;
+    });
+  }, []);
+
   const handleTagChange = (newTag) => {
     setTag(newTag);
   };
@@ -77,7 +86,7 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects">
-      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
+      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12 projects-heading">
         My Projects
       </h2>
       <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
@@ -119,5 +128,30 @@ const ProjectsSection = () => {
     </section>
   );
 };
+
+// Add CSS for animations
+const styles = `
+  .projects-heading .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(1em);
+    animation: float 0.5s forwards;
+  }
+
+  @keyframes float {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+// Inject styles into the document
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement("style");
+  styleSheet.type = "text/css";
+  styleSheet.innerText = styles;
+  document.head.appendChild(styleSheet);
+}
 
 export default ProjectsSection;
