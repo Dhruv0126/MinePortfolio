@@ -54,6 +54,7 @@ const EmailSection = () => {
             href="https://github.com/Dhruv0126"
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:transform hover:scale-105 hover:shadow-lg transition-transform duration-200"
           >
             <Image src={GithubIcon} alt="Github Icon" />
           </Link>
@@ -61,6 +62,7 @@ const EmailSection = () => {
             href="https://www.linkedin.com/in/dhruvgupta0126"
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:transform hover:scale-105 hover:shadow-lg transition-transform duration-200"
           >
             <Image src={LinkedinIcon} alt="Linkedin Icon" />
           </Link>
@@ -121,7 +123,7 @@ const EmailSection = () => {
             </div>
             <button
               type="submit"
-              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full hover:transform hover:scale-105 hover:shadow-lg transition-transform duration-200"
             >
               Send Message
             </button>
