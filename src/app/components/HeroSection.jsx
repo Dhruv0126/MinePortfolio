@@ -54,8 +54,8 @@ const HeroSection = () => {
 </a>
 
             <a
-    href="/Morgan Housel.pdf"
-    download="Morgan Housel.pdf"
+    href="/DhruvGupta_Resume(U).pdf"
+    download="DhruvGupta_Resume(U).pdf"
     className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3 hover:transform hover:scale-105 hover:shadow-lg transition-transform duration-200"
   >
     <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">

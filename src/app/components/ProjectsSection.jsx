@@ -9,31 +9,31 @@ const projectsData = [
     id: 1,
     title: "TalentScout Hiring Assistant",
     description:
-      "Built an AI hiring assistant using Streamlit, LangChain, Groq API, and Python to automate candidate screening and generate tailored interview questions.",
-    image: "/images/projects/ai-shopee-chatbot.png",
+      "Developed an AI-powered hiring assistant with Streamlit, LangChain, Groq API, and Python to automate candidate screening. Enabled resume parsing, intelligent filtering, and dynamic generation of tailored interview questions, streamlining the recruitment process with an interactive web interface.",
+    image: "/images/projects/RECRUIT.webp",
     tag: ["All", "AI/ML","Web"],
-    gitUrl: "https://github.com/Dhruv0126/TalentScout",
-    previewUrl: "https://github.com/Dhruv0126/TalentScout/blob/main/README.md", // Replace with actual live preview URL if available
+    gitUrl: "https://github.com/Dhruv0126/TalentScout/blob/main/README.md",
+    previewUrl: "https://talentscout-dhruv0126.streamlit.app/", // Replace with actual live preview URL if available
   },
   {
     id: 2,
-    title: "Fake Review Detection",
+    title: "RAG ChatFlow",
     description:
-      "Developed a Flask web app integrating a machine learning model using SVM, TF-IDF, LIME, and SHAP to detect fake reviews with 90% accuracy.",
-    image: "/images/projects/fake-review-detection.png",
+      "Developed a RAG chatbot enabling PDF/TXT upload, chunking, and embedding via Google Gemini API with ChromaDB storage. Built a Flask backend and HTML/JS frontend to retrieve top-K chunks and generate grounded responses for seamless chat.",
+    image: "/images/projects/RAG.png",
     tag: ["All", "AI/ML","Web"],
-    gitUrl: "https://github.com/Dhruv0126/Fake-Review-Detection",
-    previewUrl: "https://github.com/Dhruv0126/Fake-Review-Detection/blob/main/README.md", // Replace with actual live preview URL if available
+    gitUrl: "https://github.com/Dhruv0126/Rag_ChatFlow/blob/main/README.md",
+    previewUrl: "https://github.com/Dhruv0126/Rag_ChatFlow/blob/main/README.md", // Replace with actual live preview URL if available
   },
   {
     id: 3,
-    title: "Google Stock Forecasting",
+    title: "Utilities_Yolov8 ",
     description:
-      "Forecasted Google stock prices using RNNs and LSTM with TensorFlow and Keras, visualizing trends with Matplotlib.",
-    image: "/images/projects/google-stock-forecasting.png",
-    tag: ["All", "AI/ML"],
-    gitUrl: "https://github.com/Dhruv0126/Google_Stock_Price_forecasting-",
-    previewUrl: "https://github.com/Dhruv0126/Google_Stock_Price_forecasting-/blob/main/README.md", // Replace with actual live preview URL if available
+      "Built a custom kitchen utilities detector with YOLOv8, labeling spoons, cups, and plates. Developed a Streamlit app for real-time image, video, and webcam inference with bounding boxes, deployed via Colab/ngrok and integrated CI.",
+    image: "/images/projects/yolo1.png",
+    tag: ["All", "AI/ML","Web"],
+    gitUrl: "https://github.com/Dhruv0126/Utilities_Yolov8/blob/main/README.md",
+    previewUrl: "https://utilitiesyolov8-a5ajt696w6sbkw7pgzzpce.streamlit.app/", // Replace with actual live preview URL if available
   },
   {
     id: 4,
@@ -42,8 +42,8 @@ const projectsData = [
       "Implemented a neural network using Keras for multi-class classification of wine quality.",
     image: "/images/projects/wine-quality-check.png",
     tag: ["All", "AI/ML"],
-    gitUrl: "https://github.com/Dhruv0126?tab=repositories", // Update with actual repository URL if available
-    previewUrl: "https://github.com/Dhruv0126?tab=repositories", // Replace with actual live preview URL if available
+    gitUrl: "https://github.com/Dhruv0126/Wine-Quality-Check/blob/main/README.md", // Update with actual repository URL if available
+    previewUrl: "https://github.com/Dhruv0126/Wine-Quality-Check/blob/main/README.md", // Replace with actual live preview URL if available
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const projectsData = [
       "Built a real-time body function detector using OpenCV and PoseNet for accurate pose estimation, reducing latency by 30%.",
     image: "/images/projects/posture.png",
     tag: ["All", "AI/ML"],
-    gitUrl: "https://github.com/Dhruv0126/BodyFuncDetector_Analyzer-", // Update with actual repository URL if available
+    gitUrl: "https://github.com/Dhruv0126/BodyFuncDetector_Analyzer-/blob/main/README.md", // Update with actual repository URL if available
     previewUrl: "https://github.com/Dhruv0126/BodyFuncDetector_Analyzer-/blob/main/README.md", // Replace with actual live preview URL if available
   },
 ];
