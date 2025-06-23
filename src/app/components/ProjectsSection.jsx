@@ -23,7 +23,7 @@ const projectsData = [
     image: "/images/projects/RAG.png",
     tag: ["All", "AI/ML","Web"],
     gitUrl: "https://github.com/Dhruv0126/Rag_ChatFlow/blob/main/README.md",
-    previewUrl: "https://github.com/Dhruv0126/Rag_ChatFlow/blob/main/README.md", // Replace with actual live preview URL if available
+    previewUrl: "https://rag-chatflow-dhruv0126.onrender.com", // Replace with actual live preview URL if available
   },
   {
     id: 3,
