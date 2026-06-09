@@ -1,24 +1,25 @@
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 
 const variants = {
   default: { width: 0 },
-  active: { width: "calc(100% - 0.75rem)" },
+  active: { width: "100%" },
 };
 
 const TabButton = ({ active, selectTab, children }) => {
   const buttonClasses = active ? "text-white" : "text-[#ADB7BE]";
 
   return (
-    <button onClick={selectTab} className="hover:transform hover:scale-105 hover:shadow-lg transition-transform duration-200">
-      <p className={`mr-3 font-semibold hover:text-white ${buttonClasses}`}>
+    <button onClick={selectTab} className="mr-4 group">
+      <p className={`font-medium text-sm hover:text-white transition-colors ${buttonClasses}`}>
         {children}
       </p>
       <motion.div
         animate={active ? "active" : "default"}
         variants={variants}
-        className="h-1 bg-primary-500 mt-2 mr-3"
-      ></motion.div>
+        className="h-0.5 bg-gradient-to-r from-primary-500 to-accent-cyan mt-1.5"
+      />
     </button>
   );
 };

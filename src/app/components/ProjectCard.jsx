@@ -1,47 +1,104 @@
-import React from "react";
+"use client";
+import React, { useRef } from "react";
 import { CodeBracketIcon, EyeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
-const ProjectCard = ({ imgUrl, title, description, gitUrl, previewUrl }) => {
+const ProjectCard = ({
+  imgUrl,
+  title,
+  description,
+  gitUrl,
+  gitLabel,
+  previewUrl,
+  previewLabel,
+  caseStudySlug,
+}) => {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform =
+      "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+  };
+
   return (
-    <motion.div
-      whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)" }}
-      transition={{ type: "spring", stiffness: 300 }}
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="transition-transform duration-200 ease-out"
+      style={{ transformStyle: "preserve-3d" }}
     >
-      <div>
+      <div className="glass-card overflow-hidden h-full">
         <div
-          className="h-52 md:h-72 rounded-t-xl relative group"
+          className="h-52 md:h-56 relative group"
           style={{
             backgroundImage: `url(${imgUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
           }}
         >
-          <div className="overlay items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500">
+          <div className="absolute inset-0 bg-[#0a0a0f]/0 group-hover:bg-[#0a0a0f]/70 transition-all duration-300 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100">
             <Link
               href={gitUrl}
-              aria-label="View source code on GitHub"
-              className="h-14 w-14 mr-2 border-2 relative rounded-full border-[#ADB7BE] hover:border-white group/link"
+              target="_blank"
+              aria-label={gitLabel || "View source code on GitHub"}
+              title={gitLabel || "View on GitHub"}
+              className="h-12 w-12 rounded-full border border-white/30 flex items-center justify-center hover:border-accent-cyan hover:bg-white/10 transition-colors"
             >
-              <CodeBracketIcon className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group-hover/link:text-white" />
+              <CodeBracketIcon className="h-6 w-6 text-white" />
             </Link>
-            <Link
-              href={previewUrl}
-              aria-label="View live preview"
-              className="h-14 w-14 border-2 relative rounded-full border-[#ADB7BE] hover:border-white group/link"
-            >
-              <EyeIcon className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group-hover/link:text-white" />
-            </Link>
+            {previewUrl ? (
+              <Link
+                href={previewUrl}
+                target="_blank"
+                aria-label="View live preview"
+                className="h-12 w-12 rounded-full border border-white/30 flex items-center justify-center hover:border-accent-cyan hover:bg-white/10 transition-colors"
+              >
+                <EyeIcon className="h-6 w-6 text-white" />
+              </Link>
+            ) : previewLabel ? (
+              <span className="px-3 py-1.5 rounded-full border border-white/20 text-xs font-mono text-accent-cyan max-w-[140px] text-center">
+                {previewLabel}
+              </span>
+            ) : null}
           </div>
         </div>
-        <div className="text-white rounded-b-xl mt-3 bg-[#181818] py-6 px-4">
-          <h5 className="text-xl font-semibold mb-2">{title}</h5>
-          <p className="text-[#ADB7BE]">{description}</p>
+        <div className="p-5">
+          <h5 className="font-heading text-lg font-semibold text-white mb-2">
+            {title}
+          </h5>
+          <p className="text-[#ADB7BE] text-sm line-clamp-3">{description}</p>
+          {!previewUrl && previewLabel && (
+            <p className="mt-2 text-xs font-mono text-accent-cyan">
+              {previewLabel}
+            </p>
+          )}
+          {caseStudySlug && (
+            <Link
+              href={`/projects/${caseStudySlug}`}
+              className="inline-block mt-3 text-xs font-mono text-accent-cyan hover:text-white transition-colors"
+            >
+              Read case study →
+            </Link>
+          )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -5,9 +5,9 @@ import CountUp from "react-countup";
 
 const achievementsList = [
   { metric: "Projects", value: 5, postfix: "+" },
-  { metric: "Internships", value: 2},
+  { metric: "Internships", value: 3},
   { metric: "Certifications", value: 3, postfix: "+"},
-  { metric: "Years", value: 2, postfix: "+" },
+  { metric: "Years", value: 1, postfix: "+" },
 ];
 
 const AchievementsSection = () => {
