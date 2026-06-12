@@ -2,20 +2,24 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Create a Resend instance using the API key from the environment variable.
 const resend = new Resend(process.env.RESEND_API_KEY);
-const fromEmail = process.env.FROM_EMAIL;
 
 export async function POST(req) {
   try {
-    if (!process.env.RESEND_API_KEY || !process.env.FROM_EMAIL) {
+    const apiKey = process.env.RESEND_API_KEY;
+    const fromEmail = process.env.FROM_EMAIL;  // Must be a verified Resend sender
+    const toEmail = process.env.TO_EMAIL || fromEmail; // Where you receive messages
+
+    if (!apiKey || !fromEmail) {
+      console.error("Missing env vars:", { apiKey: !!apiKey, fromEmail: !!fromEmail });
       return NextResponse.json(
         { error: "Email service is not configured." },
         { status: 503 }
       );
     }
 
-    const { email, subject, message } = await req.json();
+    const body = await req.json();
+    const { email, subject, message } = body;
 
     if (!email || !subject || !message) {
       return NextResponse.json(
@@ -25,22 +29,29 @@ export async function POST(req) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [fromEmail],
-      subject: subject,
-      text: `From: ${email}\n\nMessage: ${message}`,
+      from: fromEmail,         // e.g. "onboarding@resend.dev" or "contact@yourdomain.com"
+      to: [toEmail],           // e.g. "dhruv06012@gmail.com"
+      reply_to: email,         // visitor's email so you can reply directly
+      subject: `[Portfolio] ${subject}`,
+      text: `From: ${email}\n\nMessage:\n${message}`,
     });
 
     if (error) {
-      return NextResponse.json({ error }, { status: 500 });
+      console.error("Resend API error:", JSON.stringify(error));
+      return NextResponse.json(
+        { error: error.message || "Failed to send email." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json(data);
     
   } catch (error) {
+    console.error("Send route error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
     );
   }
 }
+

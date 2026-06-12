@@ -13,7 +13,7 @@ const ProjectsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const filteredProjects = projectsData.filter((project) =>
-    project.tag.includes(tag)
+    project.tag.includes(tag) && project.slug !== "resume-screener"
   );
 
   return (
@@ -43,7 +43,7 @@ const ProjectsSection = () => {
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {filteredProjects.map((project, index) => (
-          <motion.li key={project.id} variants={fadeInUp} custom={index}>
+          <motion.li key={project.id} variants={fadeInUp} custom={index} className="h-full">
             <ProjectCard
               title={project.title}
               description={project.description}

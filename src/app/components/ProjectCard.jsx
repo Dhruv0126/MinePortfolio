@@ -40,12 +40,12 @@ const ProjectCard = ({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="transition-transform duration-200 ease-out"
+      className="transition-transform duration-200 ease-out h-full"
       style={{ transformStyle: "preserve-3d" }}
     >
-      <div className="glass-card overflow-hidden h-full">
+      <div className="glass-card overflow-hidden h-full flex flex-col">
         <div
-          className="h-52 md:h-56 relative group"
+          className="h-52 md:h-56 relative group flex-shrink-0"
           style={{
             backgroundImage: `url(${imgUrl})`,
             backgroundSize: "cover",
@@ -78,20 +78,22 @@ const ProjectCard = ({
             ) : null}
           </div>
         </div>
-        <div className="p-5">
-          <h5 className="font-heading text-lg font-semibold text-white mb-2">
-            {title}
-          </h5>
-          <p className="text-[#ADB7BE] text-sm line-clamp-3">{description}</p>
-          {!previewUrl && previewLabel && (
-            <p className="mt-2 text-xs font-mono text-accent-cyan">
-              {previewLabel}
-            </p>
-          )}
+        <div className="p-5 flex flex-col flex-grow justify-between">
+          <div>
+            <h5 className="font-heading text-lg font-semibold text-white mb-2">
+              {title}
+            </h5>
+            <p className="text-[#ADB7BE] text-sm line-clamp-3 mb-2">{description}</p>
+            {!previewUrl && previewLabel && (
+              <p className="text-xs font-mono text-accent-cyan">
+                {previewLabel}
+              </p>
+            )}
+          </div>
           {caseStudySlug && (
             <Link
               href={`/projects/${caseStudySlug}`}
-              className="inline-block mt-3 text-xs font-mono text-accent-cyan hover:text-white transition-colors"
+              className="inline-block mt-3 text-xs font-mono text-accent-cyan hover:text-white transition-colors self-start"
             >
               Read case study →
             </Link>

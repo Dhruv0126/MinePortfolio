@@ -96,7 +96,7 @@ export default function ResumeScreenerCaseStudy() {
 
         <div className="glass-card overflow-hidden mb-12 relative h-64 md:h-96">
           <Image
-            src="/images/projects/AI-Pwered Resume Screener.png"
+            src="/images/projects/AI_Powered Resume Screener.png"
             alt="AI-Powered Resume Screener — project thumbnail"
             fill
             className="object-cover"
