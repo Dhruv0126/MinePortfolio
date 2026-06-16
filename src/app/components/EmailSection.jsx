@@ -29,17 +29,18 @@ const EmailSection = () => {
     };
 
     try {
-      const response = await fetch("/api/send", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      const body = await response.json().catch(() => ({}));
+
+      if (response.ok && body.success) {
         setEmailSubmitted(true);
         setFormValues({ email: "", subject: "", message: "" });
       } else {
-        const body = await response.json().catch(() => ({}));
         setError(
           body.error ||
             "Failed to send message. Please try again or email dhruv06012@gmail.com directly."
